@@ -12,10 +12,19 @@
             document.write("The sum of a and b is: " + c);
             console.log("The sum of a and b is: " + c);
         }
+        function info(){
+            let age=parseInt(prompt("Enter your age:"));
+            if (age >=18){
+                alert("You are eligible to vote.");
+            } else {
+                alert("You are not eligible to vote.");
+            }
+        }
     </script>
 </head>
 <body>
     <button onclick="sum()">Calculate Sum</button>
+    <button onclick="info()">Check Voting Eligibility</button>
 
 </body>
 </html>
