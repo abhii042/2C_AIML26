@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Registration</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .box {
+    border: 1px solid #000;
+    padding: 20px;
+    width: 350px;
+  }
+  .field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .field label {
+    width: 130px;
+  }
+  .field input {
+    flex: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="box">
+
+  <h1>Registration</h1>
+
+  <form id="regForm">
+
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name">
+    </div>
+    <span id="nameError" style="color:red;"></span><br>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="text" id="email">
+    </div>
+    <span id="emailError" style="color:red;"></span><br>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password">
+    </div>
+    <span id="passwordError" style="color:red;"></span><br>
+
+    <div class="field">
+      <label for="confirmPassword">Re-enter Password</label>
+      <input type="password" id="confirmPassword">
+    </div>
+    <span id="confirmPasswordError" style="color:red;"></span><br>
+
+    <div class="field">
+      <label for="mobile">Mobile Number</label>
+      <input type="text" id="mobile">
+    </div>
+    <span id="mobileError" style="color:red;"></span><br><br>
+
+    <div style="text-align:center;">
+      <button type="submit">Submit</button>
+    </div>
+
+  </form>
+
+  <p id="successMsg" style="color:green; display:none;">Registration successful!</p>
+
+</div>
+
+<script>
+  const form = document.getElementById('regForm');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let isValid = true;
+    
+    document.getElementById('nameError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('passwordError').textContent = '';
+    document.getElementById('confirmPasswordError').textContent = '';
+    document.getElementById('mobileError').textContent = '';
+    document.getElementById('successMsg').style.display = 'none';
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const mobile = document.getElementById('mobile').value.trim();
+
+    // name check
+    if (name === '') {
+      document.getElementById('nameError').textContent = 'Name is required';
+      isValid = false;
+    }
+
+    // email check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === '') {
+      document.getElementById('emailError').textContent = 'Email is required';
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      document.getElementById('emailError').textContent = 'Invalid email';
+      isValid = false;
+    }
+
+    // password check
+    if (password === '') {
+      document.getElementById('passwordError').textContent = 'Password is required';
+      isValid = false;
+    } else if (password.length < 6) {
+      document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    // confirm password check
+    if (confirmPassword === '') {
+      document.getElementById('confirmPasswordError').textContent = 'Please re-enter password';
+      isValid = false;
+    } else if (password !== confirmPassword) {
+      document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+      isValid = false;
+    }
+
+    // mobile check
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (mobile === '') {
+      document.getElementById('mobileError').textContent = 'Mobile number is required';
+      isValid = false;
+    } else if (!mobileRegex.test(mobile)) {
+      document.getElementById('mobileError').textContent = 'Invalid mobile number';
+      isValid = false;
+    }
+
+    if (isValid) {
+      document.getElementById('successMsg').style.display = 'block';
+      form.reset();
+    }
+  });
+</script>
+
+</body>
+</html>
