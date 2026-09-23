@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class bankAccount{
+            constructor(accountNumber, accountHolderName, balance){
+                this.accountNumber = accountNumber;
+                this.accountHolderName = accountHolderName;
+                this.balance = balance;
+            }
+            static bankName = "NEGI BANK";
+            bankInfo(){
+                console.log("Bank Name: "+ bankAccount.bankName);
+            }
+            deposit(amount){
+                this.balance += amount;
+                console.log("Deposited: "+ amount + ". New Balance: " + this.balance);
+            }
+            withdraw(amount){
+                if(amount <= this.balance){
+                    this.balance -= amount;
+                    console.log("Withdrew: "+ amount + ". New Balance: " + this.balance);
+                } 
+                else {
+                    console.log("Insufficient balance");
+                }
+            }
+            displayBalance(){
+                console.log("current balance: "+ this.balance);
+            }
+
+            displayAccountDetails(){
+                console.log("Account Number: " + this.accountNumber);
+                console.log("Account Holder Name: " + this.accountHolderName);
+                console.log("Balance: " + this.balance);
+            }
+        }
+        let acc1=new bankAccount(1001,"Gautam",20000);
+        let acc2=new bankAccount(1002,"Rahul",2000);
+        acc1.bankInfo();
+        acc1.displayAccountDetails();
+        acc1.deposit(5000);
+        acc1.withdraw(3000);
+        acc1.displayBalance();
+        acc2.displayAccountDetails();
+        acc2.deposit(50);
+        acc2.withdraw(3000);
+        acc2.displayBalance();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
